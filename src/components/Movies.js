@@ -13,7 +13,7 @@ useEffect(() => {
       // On va chercher les datas > movies
       .then((res) =>  {
         setData(res.data.results);
-        console.log(res);
+   
       })
 
   }, []);
