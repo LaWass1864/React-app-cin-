@@ -37,28 +37,30 @@ const Cards = ({ results, genreIds = [] }) => {
     };
 
     return (
-        <li className="card">
-            <div className="card-content">
-                {/* Affiche du film */}
-                <img src={`https://image.tmdb.org/t/p/w500${results.poster_path}`} />
-                {/* Titre du film */}
-                <h3> {results.original_title} </h3>
-                {/* Date de sortie */}
-                <span> Sortie le : <Moment format="DD/MM/YYYY" >{results.release_date}</Moment></span>
-                {/*  Note des telespectateur */}
-                <h3>{results.vote_average.toFixed(1)}/10 <span style={{ color: '#ffb703' }}>&#9733;</span></h3>
-                {/* Genre du film */}
-                <div className="result">
-                    {getGenreNames(results.genre_ids).map((genre, index) => (
-                        <span className=' genreBadge' key={index}>{genre}</span>
-                    ))}
-                </div>
+        <ul>
+            <li className="card">
+                <div className="card-content">
+                    {/* Affiche du film */}
+                    <img src={`https://image.tmdb.org/t/p/w500${results.poster_path}`} />
+                    {/* Titre du film */}
+                    <h3> {results.original_title} </h3>
+                    {/* Date de sortie */}
+                    <span> Sortie le : <Moment format="DD/MM/YYYY" >{results.release_date}</Moment></span>
+                    {/*  Note des telespectateur */}
+                    <h3>{results.vote_average.toFixed(1)}/10 <span style={{ color: '#ffb703' }}>&#9733;</span></h3>
+                    {/* Genre du film */}
+                    <div className="result">
+                        {getGenreNames(results.genre_ids).map((genre, index) => (
+                            <span className=' genreBadge' key={index}>{genre}</span>
+                        ))}
+                    </div>
 
-                <h2> Synopsis : </h2>
-                <p> {results.overview} </p>
-                <button className='btn'>Ajouter aux coup de coeur</button>
-            </div>
-        </li >
+                    <h2> Synopsis : </h2>
+                    <p> {results.overview} </p>
+                    <button className='btn'>Ajouter aux coup de coeur</button>
+                </div>
+            </li >
+        </ul>
     );
 };
 

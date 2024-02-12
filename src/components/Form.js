@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Form = () => {
+const Form = ({ handleSearch }) => {
+    const [inputSearch, setInputSearch] = useState("");
+
     return (
-       <div className="form-component">
-        <div className="form-container">
-            <form action="
-            ">
-                <input type="text" />
-                <input type="submit" value="Rechercher" />
-            </form>
+        <div className="form-component">
+            <div className="form-container">
+                <form>
+                    <input type="text" placeholder="Search for a movie" />
+                    <input type="submit" value="Rechercher" />
+                </form>
+            </div>
         </div>
-       </div>
-
     );
 };
 
