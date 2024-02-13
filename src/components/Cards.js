@@ -1,13 +1,13 @@
 import React from "react";
 
 const Card = ({ movie }) => {
-// format de la date de sortie
+    // format de la date de sortie
     const dateFormater = (date) => {
         let [yy, mm, dd] = date.split("-");
         return [dd, mm, yy].join("/");
     };
-// formattage du genre
-    function  genreFinder () {
+    // formattage du genre
+    const genreFinder = () => {
         //  on stock les genres dans un Array
         let genreArray = [];
         for (let i = 0; i < movie.genre_ids.length; i++) {
@@ -95,10 +95,10 @@ const Card = ({ movie }) => {
             </h4>
             {/* genre des films */}
             <ul>
-            {movie.genre_ids && movie.genre_ids.length > 0
-    ? genreFinder()
-    : movie.genres.map((genre) => <li key={genre}>{genre.name}</li>)
-}
+                {movie.genre_ids && movie.genre_ids.length > 0
+                    ? genreFinder()
+                    : movie.genre.map((genre) => <li key={genre}>{genre.name}</li>)
+                }
 
             </ul>
 
