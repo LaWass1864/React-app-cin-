@@ -95,9 +95,11 @@ const Card = ({ movie }) => {
             </h4>
             {/* genre des films */}
             <ul>
-                {movie.genre_ids
-                    ? genreFinder()
-                    : movie.genres.map((genre) => <li key={genre}>{genre.name}</li>)}
+            {movie.genre_ids && movie.genre_ids.length > 0
+    ? genreFinder()
+    : movie.genres.map((genre) => <li key={genre}>{genre.name}</li>)
+}
+
             </ul>
 
         </div>
