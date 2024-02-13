@@ -5,12 +5,15 @@ import Favoris from './pages/Favoris';
 
 const App = () => {
   return (
+    // navigation
     <BrowserRouter>
 
       <Routes>
 
         <Route path='/' element={<Home />} />
         <Route path='/Favoris' element={<Favoris />} />
+        {/* on dit que tu renvoie sur Home quoiquil arrive */}
+        <Route path='*' element={<Home />} />
 
       </Routes>
 

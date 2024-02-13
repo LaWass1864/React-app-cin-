@@ -3,7 +3,7 @@ import Header from '../components/Header';
 
 const Favoris = () => {
     return (
-        <div>
+        <div className='user-list-page'>
            <Header/>
            
         </div>
