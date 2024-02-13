@@ -7,7 +7,8 @@ const Card = ({ movie }) => {
         return [dd, mm, yy].join("/");
     };
 // formattage du genre
-    const genreFinder = () => {
+    function  genreFinder () {
+        //  on stock les genres dans un Array
         let genreArray = [];
         for (let i = 0; i < movie.genre_ids.length; i++) {
             switch (movie.genre_ids[i]) {
