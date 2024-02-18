@@ -4,16 +4,18 @@ import Cards from './Cards';
 
 const Form = () => {
     //  on met les data dans la constante moviesData et un useState de type array
-    const [moviesData, setMoviesData] = useState([])
+    const [moviesData, setMoviesData] = useState([]);
+    //  stocker la recherche de mon utilisateur
+    const [search, setSearch] = useState("code")
     //  quand le composant est appelé, tu vas me faire la chose suivante
     useEffect(() => {
         axios.get(
-            `https://api.themoviedb.org/3/search/movie?api_key=c906cb5d4e8234c1ed739bdce117f432&query=foot`
+            `https://api.themoviedb.org/3/search/movie?api_key=c906cb5d4e8234c1ed739bdce117f432&query=${search}`
         )
             //  on va rechercher le tableau depuis l'element results
             .then((res) => setMoviesData(res.data.results));
         //  ensuite on se controle en allant dans la console > components > Form > Hooks > State
-    }, []);
+    }, [search]);
 
     return (
         <div className='form-component'>
@@ -23,7 +25,10 @@ const Form = () => {
                     <input
                         type="text"
                         placeholder="Entrez le titre d'un film"
-                        id='search-input' />
+                        id='search-input'
+                        //la feature de la recherche
+                        onChange={e => setSearch(e.target.value)}
+                    />
                     {/* Bouton Rechercher */}
                     <input type="submit"
                         value="Rechercher" />

@@ -102,8 +102,11 @@ const Card = ({ movie }) => {
                 {movie.genre_ids ? genreFinder()
                     : null}
             </ul>
+            {/*  on met une ternaire , si Synopis existe sinon on ne met rien */}
             {movie.overview ? <h3> Synopsis</h3> : ""}
-<p>{movie.overview}</p>
+            <p>{movie.overview}</p>
+            {/*  bouton ajouter au coup de coeur / ce sera un affichage conditionnel */}
+            <div className="btn"> Ajouter aux coups de coeur </div>
         </div>
     );
 };
