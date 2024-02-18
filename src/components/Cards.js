@@ -6,11 +6,13 @@ const Card = ({ movie }) => {
         let [yy, mm, dd] = date.split("-");
         return [dd, mm, yy].join("/");
     };
-    // formattage du genre
+    // fonction le trouveur de genre
     const genreFinder = () => {
         //  on stock les genres dans un Array
         let genreArray = [];
+        // il peut y avoir plusieurs genre dans un film, on boucle
         for (let i = 0; i < movie.genre_ids.length; i++) {
+            //  liste de genre de fims , si j'amais tu as ce chiffre là, tu le rajoutes
             switch (movie.genre_ids[i]) {
                 case 28:
                     genreArray.push(`Action`);
@@ -73,7 +75,7 @@ const Card = ({ movie }) => {
                     break;
             }
         }
-        return genreArray;
+        return genreArray.map((genre) => <li key={genre}>{genre}</li>)
     };
 
     return (
@@ -81,6 +83,7 @@ const Card = ({ movie }) => {
             <img
                 src={
                     movie.poster_path
+
                         ? "https://image.tmdb.org/t/p/original/" + movie.poster_path
                         : "./img/poster.jpg"
                 }
@@ -95,13 +98,12 @@ const Card = ({ movie }) => {
             </h4>
             {/* genre des films */}
             <ul>
-                {movie.genre_ids && movie.genre_ids.length > 0
-                    ? genreFinder()
-                    : movie.genre.map((genre) => <li key={genre}>{genre.name}</li>)
-                }
-
+                {/* est ce que movie.genre_ids est true */}
+                {movie.genre_ids ? genreFinder()
+                    : null}
             </ul>
-
+            {movie.overview ? <h3> Synopsis</h3> : ""}
+<p>{movie.overview}</p>
         </div>
     );
 };
