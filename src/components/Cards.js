@@ -78,6 +78,18 @@ const Card = ({ movie }) => {
         return genreArray.map((genre) => <li key={genre}>{genre}</li>)
     };
 
+    // fonction add storage
+    const addStorage = () => {
+//  creation de la variable storeData qui va garder lesid des movies selectionnés
+        let storeData = window.localStorage.movies ? window.localStorage.movies.split(",") : [];
+
+// on s'assure qu'il n'y a pasde double et on les push dans le store data
+        if (!storeData.includes(movie.id.toString())) {
+            storeData.push(movie.id);
+            window.localStorage.movies = storeData;
+        }
+    }
+
     return (
         <div className="card">
             <img
@@ -106,7 +118,10 @@ const Card = ({ movie }) => {
             {movie.overview ? <h3> Synopsis</h3> : ""}
             <p>{movie.overview}</p>
             {/*  bouton ajouter au coup de coeur / ce sera un affichage conditionnel */}
-            <div className="btn"> Ajouter aux coups de coeur </div>
+            <div className="btn"
+                onClick={() => addStorage()}> Ajouter aux coups de coeur </div>
+            {/*  quand on clique on envoi dans le local storage
+             */}
         </div>
     );
 };
