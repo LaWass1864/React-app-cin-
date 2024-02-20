@@ -27,7 +27,7 @@ const Header = () => {
         </ul>
       </nav>
       <h1>
-        React movies app
+        React movies
       </h1>
     </div>
 

@@ -1,4 +1,5 @@
 import React from "react";
+import Cards from './Cards';
 
 const Card = ({ movie }) => {
     // format de la date de sortie
@@ -80,14 +81,23 @@ const Card = ({ movie }) => {
 
     // fonction add storage
     const addStorage = () => {
-//  creation de la variable storeData qui va garder lesid des movies selectionnés
+        //  creation de la variable storeData qui va garder lesid des movies selectionnés
         let storeData = window.localStorage.movies ? window.localStorage.movies.split(",") : [];
 
-// on s'assure qu'il n'y a pasde double et on les push dans le store data
+        // on s'assure qu'il n'y a pasde double et on les push dans le store data
         if (!storeData.includes(movie.id.toString())) {
             storeData.push(movie.id);
             window.localStorage.movies = storeData;
         }
+    }
+
+    const deleteStorage = () => {
+        //  on se récupére la data qui est stocké, et on la split pour creer un element de tableau
+        let storeData = window.localStorage.movies.split(",")
+        //  tous les movies.id qui ne sont pas égaux a movie.id, on les garde.
+        let newData = storeData.filter((id) => id != movie.id)
+        // on refait un stockage
+        window.localStorage.movies = newData;
     }
 
     return (
@@ -106,23 +116,36 @@ const Card = ({ movie }) => {
                 <h5>Sorti le : {dateFormater(movie.release_date)}</h5>
             ) : null}
             <h4>
+                {/*  on veut un chiffre aprés la virgule avec le .toFixed*/}
                 {movie.vote_average.toFixed(1)}/10 <span>⭐</span>
             </h4>
             {/* genre des films */}
             <ul>
-                {/* est ce que movie.genre_ids est true */}
+                {/* est ce que movie.genre_ids existe */}
                 {movie.genre_ids ? genreFinder()
-                    : null}
+                    : movie.genres
+                        .map((genre) =>
+                            <li key={genre}>{genre.name}</li>
+                        )}
             </ul>
             {/*  on met une ternaire , si Synopis existe sinon on ne met rien */}
             {movie.overview ? <h3> Synopsis</h3> : ""}
             <p>{movie.overview}</p>
-            {/*  bouton ajouter au coup de coeur / ce sera un affichage conditionnel */}
-            <div className="btn"
-                onClick={() => addStorage()}> Ajouter aux coups de coeur </div>
-            {/*  quand on clique on envoi dans le local storage
-             */}
+            {/*  On differencie les boutons avec la data de la page. Si on a dans la data = genres on met supprimer de la liste.  */}
+            {movie.genre_ids ? (
+                <div className="btn"
+                    onClick={() => addStorage()}> Ajouter aux coups de coeur </div>
+                //  bouton "supprimer de la liste"
+            ) : (
+                <div className="btn"
+                    onClick={() => {
+                        deleteStorage();
+                        window.location.reload()
+                    }}>Supprimer de la liste</div>
+            )
+            }
         </div>
+
     );
 };
 

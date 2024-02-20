@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component, useEffect, useState } from 'react';
-import Cards from './Cards';
+import Cards from '../components/Cards';
 
 const Form = () => {
     //  on met les data dans la constante moviesData et un useState de type array
